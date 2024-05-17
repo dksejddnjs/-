@@ -1,14 +1,13 @@
-package controller;
+package com.example.demo.controller;
 
-import dto.UserDto;
-import entity.UserEntity;
+import com.example.demo.dto.UserDto;
+import com.example.demo.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import result.UserResult;
-import service.UserService;
+import com.example.demo.result.UserResult;
+import com.example.demo.service.UserService;
 
 @Slf4j
 @RestController
@@ -25,8 +24,11 @@ public class UserController {
         UserResult userResult = new UserResult(users);
         return ResponseEntity.ok(userResult);
     }
-
-    @GetMapping("{id}")
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello!";
+    }
+    @GetMapping("/{id}")
     public ResponseEntity<UserResult> getUser(@PathVariable Long id)  {
         log.info("readOne");
         UserEntity users = userService.readOne(id);

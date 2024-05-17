@@ -1,13 +1,12 @@
-package service;
+package com.example.demo.service;
 
-import dto.UserDto;
-import entity.UserEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.dto.UserDto;
+import com.example.demo.entity.UserEntity;
+import com.example.demo.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import lombok.RequiredArgsConstructor;
-import repository.UserRepository;
 
 @RequiredArgsConstructor
 @Service
@@ -31,3 +30,4 @@ public class UserService {
     }
 
 }
+

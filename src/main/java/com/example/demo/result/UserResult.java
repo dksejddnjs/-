@@ -1,5 +1,5 @@
-package result;
-import entity.UserEntity;
+package com.example.demo.result;
+import com.example.demo.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,6 +19,6 @@ public class UserResult {
     public UserResult(UserEntity users) {
         this.id = users.getId();
         this.username = users.getUsername();
-        this.usermsg = users.getUsermsg();
+        this.usermsg = users.getUsername();
     }
 }
