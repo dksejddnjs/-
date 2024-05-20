@@ -14,11 +14,11 @@ public class UserResult {
 
     private Long id;
     private String username;
-    private String usermsg;
+    private String userpwd;
 
     public UserResult(UserEntity users) {
         this.id = users.getId();
         this.username = users.getUsername();
-        this.usermsg = users.getUsername();
+        this.userpwd = users.getUserpwd();
     }
 }

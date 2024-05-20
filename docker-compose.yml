@@ -6,7 +6,7 @@ services:
     image: mysql/mysql-server:5.7
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: users_db
+      MYSQL_DATABASE: CM_db
       MYSQL_ROOT_HOST: root
       MYSQL_ROOT_PASSWORD: Pp@2sword!
       TZ: 'Asia/Seoul'

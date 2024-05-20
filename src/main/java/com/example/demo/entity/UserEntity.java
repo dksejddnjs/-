@@ -21,7 +21,7 @@ public class UserEntity {
 
     private String username;
 
-    private String usermsg;
+    private String userpwd;
 
     public void setId(Long id) {
         this.id = id;
@@ -35,12 +35,12 @@ public class UserEntity {
         this.username = username;
     }
 
-    public String getUsermsg() {
-        return usermsg;
+    public String getUserpwd() {
+        return userpwd;
     }
 
-    public void setUsermsg(String usermsg) {
-        this.usermsg = usermsg;
+    public void setUserpwd(String userpwd) {
+        this.userpwd = userpwd;
     }
 
 }
