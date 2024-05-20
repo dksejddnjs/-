@@ -6,8 +6,10 @@ import com.example.demo.result.UserResult;
 import com.example.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @Slf4j
 @RestController
@@ -18,11 +20,15 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<UserResult> create(@RequestBody UserDto userDto) {
-        log.info("create Users");
-        UserEntity users = userService.create(userDto);
-        UserResult userResult = new UserResult(users);
-        return ResponseEntity.ok(userResult);
+    public ResponseEntity<?> createOrLogin(@RequestBody UserDto userDto) {
+        log.info("createOrLogin User");
+        try {
+            UserEntity user = userService.createOrLogin(userDto);
+            UserResult userResult = new UserResult(user);
+            return ResponseEntity.ok(userResult);
+        } catch (ResponseStatusException e) {
+            return ResponseEntity.status(e.getStatusCode()).body(e.getReason());
+        }
     }
 
     @GetMapping("/hello")

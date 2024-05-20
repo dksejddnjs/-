@@ -55,11 +55,16 @@
                         connectWebSocket();
                     },
                     error: function(error) {
-                        alert("Error registering user: " + error.responseText);
+                        if (error.status === 401) {
+                            alert("비밀번호가 일치하지 않습니다.");
+                         }
+                         else {
+                            alert("Error: " + error.responseJSON.message);
+                        }
                     }
                 });
             } else {
-                alert("Username and Password are required.");
+                alert("사용자 이름 및 암호가 필요합니다.");
             }
         });
 
@@ -68,7 +73,7 @@
         });
 
         function connectWebSocket() {
-            websocket = new WebSocket("ws://192.168.101.81:8080/ws/chat")
+            websocket = new WebSocket("ws://192.168.101.81:8080/ws/chat");
 
             websocket.onmessage = onMessage;
             websocket.onopen = onOpen;
