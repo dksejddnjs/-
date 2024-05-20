@@ -85,11 +85,11 @@ nginx -s reload
 `websocket = new WebSocket("ws://localhost:8080/ws/chat")`  이 부분을 
 `websocket = new WebSocket("ws://192.168.101.81:8080/ws/chat")`  ← 이걸로 바꾸니 상대방이 보낸 메시지들도 `payload` log로 잘 뜨는걸 확인함
 
-2.
+2. 405 오류, 클라이언트가 해당 경로에 POST 요청을 보내면 서버는 해당 요청을 처리할 수 없으며 "Method Not Allowed" 오류가 발생
   "status": 405,
   "error": "Method Not Allowed"
   
-  405 오류, 클라이언트가 해당 경로에 POST 요청을 보내면 서버는 해당 요청을 처리할 수 없으며 "Method Not Allowed" 오류가 발생
+ 
 
 ------------------------------------------------------------------------------------------
 **개발 도구**
