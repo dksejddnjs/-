@@ -88,7 +88,13 @@ nginx -s reload
 2. 405 오류, 클라이언트가 해당 경로에 POST 요청을 보내면 서버는 해당 요청을 처리할 수 없으며 "Method Not Allowed" 오류가 발생
    
   "status": 405,
+  
   "error": "Method Not Allowed"
+  
+  "message": "Method 'POST' is not supported.",
+  
+    "path": "/chat"
+
   
  
 
