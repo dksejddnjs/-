@@ -33,8 +33,10 @@ Dependency 디펜던시: 의존성
 
 `spring.jpa.hibernate.ddl-auto=update` 이 부분이 update가 아닌 create으로 되어 있어서 그랬던 것을 알게되었다.
 
-`spring.jpa.hibernate.ddl-auto` 는 Spring Boot에서 Hibernate의 데이터베이스 스키마 자동 생성 및 업데이트 동작을 제어하는 설정 옵션이다. 이 설정을 통해 Hibernate가 애플리케이션의 엔티티 모델과 데이터베이스 스키마 간의 관계를 어떻게 관리할지 정의할 수 있다.
+`spring.jpa.hibernate.ddl-auto` 는 Spring Boot에서 Hibernate의 데이터베이스 스키마 자동 생성 및 업데이트 동작을 제어하는 설정 옵션이다. 이 설정을 통해 Hibernate가 애플리케이션의 엔티티 모델과 데이터베이스 스키마 간의 관계를 어떻게 관리할지 정의할 수 있
+다.
 
+------------------------------------------------------------------------------------------
 **240519 socket 오류**
 
 1. http://localhost:8098/chat 으로 들어가면 404오류와 함께 반환한 chater를 찾지 못 하는 오류가  뜸.
