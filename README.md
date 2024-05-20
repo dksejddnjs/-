@@ -93,9 +93,9 @@ nginx -s reload
   
   "message": "Method 'POST' is not supported.",
   
-    "path": "/chat"
+  "path": "/chat"
 
-  
+
  
 
 ------------------------------------------------------------------------------------------
