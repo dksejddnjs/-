@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
+        import org.springframework.web.server.ResponseStatusException;
 
 @Slf4j
 @RestController
@@ -21,13 +21,17 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?> createOrLogin(@RequestBody UserDto userDto) {
-        log.info("createOrLogin User");
+        log.info("createOrLogin User: {}", userDto);
         try {
             UserEntity user = userService.createOrLogin(userDto);
             UserResult userResult = new UserResult(user);
             return ResponseEntity.ok(userResult);
         } catch (ResponseStatusException e) {
+            log.error("Error during user registration or login: {}", e.getReason(), e);
             return ResponseEntity.status(e.getStatusCode()).body(e.getReason());
+        } catch (Exception e) {
+            log.error("Unexpected error: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unexpected error occurred");
         }
     }
 

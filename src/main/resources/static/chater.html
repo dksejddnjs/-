@@ -54,13 +54,14 @@
                         $("#chatArea").show();
                         connectWebSocket();
                     },
-                    error: function(error) {
-                        if (error.status === 401) {
-                            alert("비밀번호가 일치하지 않습니다.");
-                         }
-                         else {
-                            alert("Error: " + error.responseJSON.message);
+                    error: function(xhr) {
+                        let errorMessage = "Unknown error occurred";
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            errorMessage = xhr.responseJSON.message;
+                        } else if (xhr.responseText) {
+                            errorMessage = xhr.responseText;
                         }
+                        alert("Error registering user: " + errorMessage);
                     }
                 });
             } else {
@@ -118,6 +119,7 @@
         }
     });
 </script>
+
 
 </body>
 </html>
