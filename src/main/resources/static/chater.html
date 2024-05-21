@@ -30,15 +30,27 @@
                     </div>
                 </div>
             </div>
+            <div class="col-6">
+                <div class="input-group mb-3">
+                    <form id="uploadForm" enctype="multipart/form-data">
+                        <input type="file" id="imageInput" name="image" class="form-control">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="button-upload">이미지 전송</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
 
 <script th:inline="javascript">
     $(document).ready(function(){
         let websocket;
         let username;
         let userpwd;
+
 
         $("#button-login").on("click", (e) => {
             username = $("#username").val();
@@ -54,24 +66,51 @@
                         $("#chatArea").show();
                         connectWebSocket();
                     },
-                    error: function(xhr) {
-                        let errorMessage = "Unknown error occurred";
-                        if (xhr.responseJSON && xhr.responseJSON.message) {
-                            errorMessage = xhr.responseJSON.message;
-                        } else if (xhr.responseText) {
-                            errorMessage = xhr.responseText;
+                    error: function(error) {
+                        if (error.status === 401) {
+                            alert("비밀번호가 일치하지 않습니다.");
                         }
-                        alert("Error registering user: " + errorMessage);
+                        else {
+                            alert("Error: " + error.responseJSON.message);
+                        }
                     }
                 });
             } else {
                 alert("사용자 이름 및 암호가 필요합니다.");
             }
         });
-
         $("#button-send").on("click", (e) => {
             send();
         });
+
+        $("#button-upload").on("click", function() {
+            var imageInput = document.getElementById("imageInput");
+            var file = imageInput.files[0];
+            if (file) {
+                var formData = new FormData();
+                formData.append("image", file);
+
+                $.ajax({
+                    url: "/api/image",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        console.log("이미지 업로드 성공:", response);
+                    },
+                    error: function(xhr) {
+                        console.error("이미지 업로드 실패:", xhr.responseText);
+                    }
+                });
+            } else {
+                alert("이미지를 선택해주세요.");
+            }
+        });
+
+        // $("#button-send").on("click", (e) => {
+        //     send();
+        // });
 
         function connectWebSocket() {
             websocket = new WebSocket("ws://192.168.101.81:8080/ws/chat");
