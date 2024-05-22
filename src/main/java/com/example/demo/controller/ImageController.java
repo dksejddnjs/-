@@ -15,7 +15,6 @@ import java.nio.file.StandardCopyOption;
 @RestController
 public class ImageController {
 
-    // 파일을 저장할 디렉토리 경로를 application.properties에서 읽어옴
     @Value("${file.upload-dir}")
     private String uploadDir;
 
