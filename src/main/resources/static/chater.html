@@ -44,13 +44,11 @@
     </div>
 </div>
 
-
 <script th:inline="javascript">
     $(document).ready(function(){
         let websocket;
         let username;
         let userpwd;
-
 
         $("#button-login").on("click", (e) => {
             username = $("#username").val();
@@ -79,6 +77,7 @@
                 alert("사용자 이름 및 암호가 필요합니다.");
             }
         });
+
         $("#button-send").on("click", (e) => {
             send();
         });
@@ -98,6 +97,8 @@
                     contentType: false,
                     success: function(response) {
                         console.log("이미지 업로드 성공:", response);
+                        // 업로드한 이미지의 URL을 메시지로 전송
+                        send(response.imageUrl);
                     },
                     error: function(xhr) {
                         console.error("이미지 업로드 실패:", xhr.responseText);
@@ -108,10 +109,6 @@
             }
         });
 
-        // $("#button-send").on("click", (e) => {
-        //     send();
-        // });
-
         function connectWebSocket() {
             websocket = new WebSocket("ws://192.168.101.81:8080/ws/chat");
 
@@ -120,8 +117,8 @@
             websocket.onclose = onClose;
         }
 
-        function send(){
-            let msg = $("#msg").val();
+        function send(message) {
+            let msg = message || $("#msg").val();
             websocket.send(username + ":" + msg);
             $("#msg").val('');
         }
@@ -140,25 +137,30 @@
             var data = msg.data;
             var arr = data.split(":");
             var sessionId = arr[0];
-            var message = arr[1];
+            var message = arr.slice(1).join(":");
 
+            var str = "<div class='col-6'>";
             if(sessionId == username){
-                var str = "<div class='col-6'>";
                 str += "<div class='alert alert-secondary'>";
-                str += "<b>" + sessionId + " : " + message + "</b>";
-                str += "</div></div>";
-                $("#msgArea").append(str);
             } else {
-                var str = "<div class='col-6'>";
                 str += "<div class='alert alert-warning'>";
-                str += "<b>" + sessionId + " : " + message + "</b>";
-                str += "</div></div>";
-                $("#msgArea").append(str);
             }
+            str += "<b>" + sessionId + " : " + formatMessage(message) + "</b>";
+            str += "</div></div>";
+            $("#msgArea").append(str);
+        }
+
+        function formatMessage(message) {
+            // 메시지에서 URL을 추출하여 링크로 변환
+            let urlPattern = /(https?:\/\/[^\s]+)/g;
+            return message.replace(urlPattern, '<a href="$1" target="_blank">$1</a>');
         }
     });
 </script>
-
-
 </body>
 </html>
+
+
+
+
+
