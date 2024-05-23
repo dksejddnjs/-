@@ -144,6 +144,63 @@ image controller에서 @PostMapping 등등 Post 관련으로 처리 했음에도
 
 저 url은 파일 다운로드를 권하는 url이라 눌렀을 때 페이지로 넘어가지 않고 다운로드만 되고 있다.
 
+-----------------------------------------------------------------------------------------
+**0523 소켓 이미지, 파일 전송**
+
+1. url이 한 번에 안보내지는 것을 해결하기 위해서
+
+`function appendImageURLToChat(imageUrl){}`
+
+`function appendLinkToChat(linkUrl){}`  선언한 function에 ⇒
+
+`websocket.send(username + ":" + imageUrl);`/ `websocket.send(username + ":" + linkUrl);` 로 수정해주었다. 그랬더니 바로 상대방이 볼 수 있게 되었다.
+
+----------
+코드 이해
+
+1. WebSocket 연결:
+
+사용자가 로그인하면 connectWebSocket() 함수가 호출. 이 함수는 서버에 WebSocket 연결을 설정.
+
+function connectWebSocket() {
+
+    websocket = new WebSocket("ws://192.168.101.81:8080/ws/chat");
+
+
+    websocket.onmessage = onMessage;
+    
+    websocket.onopen = onOpen;
+    
+    websocket.onclose = onClose;
+}
+
+2. 메시지 전송:
+
+사용자가 메시지를 입력하고 전송 버튼을 클릭하면 send() 함수가 호출. 이 함수는 WebSocket을 통해 서버로 메시지를 전송.
+
+function send(message) { let msg = message || $("#msg").val(); websocket.send(username + ":" + msg); $("#msg").val(''); }
+
+3. 메시지 수신:
+
+서버에서 메시지를 받으면 onMessage() 함수가 호출. 이 함수는 메시지를 파싱하고, HTML을 생성하여 #msgArea에 추가.
+
+function onMessage(msg) { var data = msg.data; var arr = data.split(":"); varsessionId = arr[0]; var message = arr.slice(1).join(":"); var str = "<div class='col-6'>"; 
+
+if(sessionId == username){ str += "<div class='alert alert-secondary'>"; } else { str += "<div class='alert alert-warning'>"; } str += "<b>"+ sessionId + " : " + 
+
+formatMessage(message) + "</b>"; str += "</div></div>"; $("#msgArea").append(str); }
+
+4. 사용자 상태 알림:
+
+WebSocket 연결이 열리거나 닫힐 때, 사용자 입장 및 퇴장 메시지가 전송.
+
+function onOpen(evt) { var str = username + ": 님이 입장하셨습니다."; websocket.send(str); } 
+
+function onClose(evt) { var str = username + ": 님이 방을 나가셨습니다."; websocket.send(str); }
+
+파싱이란 일반적으로 문자열을 구조화된 데이터로 변환하는 과정을 말함. 
+메시지 파싱은 클라이언트와 서버 간의 통신과 직접적으로 관련이 있다. 파싱은 메시지를 받아 적절히 화면에 표시하는 과정이다.
+
 ------------------------------------------------------------------------------------------
 **개발 도구**
 
