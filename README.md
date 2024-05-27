@@ -238,15 +238,24 @@ AOP(Asepct Oriented Programming):
 --------------------------------------------------------------------------------------
 필터(Filter)와 인터셉터(Interceptor) 차이
 
-						              필터(Filter)				            인터셉터(Interceptor)	
-                    
-관리되는 컨테이너			     서블릿 컨테이너				              스프링 컨테이너
+필터(Filter)    
 
-스프링의 예외처리 여부			     X						                     	O
+관리되는 컨테이너: 서블릿 컨테이너
 
-Request/ Response 			   O						                     	X
+스프링의 예외처리 여부: X
 
-객체 조작 가능 여부
+Request/ Response 객체 조작 가능 여부: O
+
+
+
+인터셉터(Interceptor)	
+
+관리되는 컨테이너: 스프링 컨테이너
+
+스프링의 예외처리 여부: O
+
+Request/ Response 객체 조작 가능 여부: X
+
 
 용도
 
