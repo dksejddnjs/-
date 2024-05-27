@@ -27,7 +27,7 @@ public class UserService {
 
     public UserEntity readOne(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "사용자를 찾을 수 없습니다."));
     }
 
     public UserEntity createOrLogin(UserDto userDto) {
@@ -38,7 +38,7 @@ public class UserService {
             if (existingUser.get().getUserpwd().equals(userDto.getUserpwd())) {
                 return existingUser.get();
             } else {
-                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid password");
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호 오류");
             }
         } else {
             // 새로운 사용자 등록

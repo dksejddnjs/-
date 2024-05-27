@@ -27,11 +27,11 @@ public class UserController {
             UserResult userResult = new UserResult(user);
             return ResponseEntity.ok(userResult);
         } catch (ResponseStatusException e) {
-            log.error("Error during user registration or login: {}", e.getReason(), e);
+            log.error("사용자 등록 또는 로그인 중 오류 발생: {}", e.getReason(), e);
             return ResponseEntity.status(e.getStatusCode()).body(e.getReason());
         } catch (Exception e) {
-            log.error("Unexpected error: {}", e.getMessage(), e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unexpected error occurred");
+            log.error("오류 발생: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("오류 발생");
         }
     }
 

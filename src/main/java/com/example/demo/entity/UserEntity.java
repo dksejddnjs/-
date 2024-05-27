@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.w3c.dom.Text;
 
 @Getter
 @Builder
@@ -13,6 +12,7 @@ import org.w3c.dom.Text;
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class UserEntity {
 
     @Id
