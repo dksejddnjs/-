@@ -19,10 +19,12 @@ public class Message {
     @JoinColumn(name = "senderId", nullable = false)
     private UserEntity sender;
 
+
     private LocalDateTime timestamp; // 시간 생성
 // LocalDateTime 클래스의 인스턴스 변수. 날짜와 시간 정보를 표현할 수 있는 클래스
     //timestamp 변수를 사용하여 메시지가 생성된 시간을 기록할 수 있으며, 이 정보를 활용하여 메시지를 정렬하거나 시간대 변환 등의 작업을 수행
 
+    
     public Long getId() {
         return id;
     }

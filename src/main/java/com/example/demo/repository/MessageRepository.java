@@ -8,6 +8,6 @@ import java.util.List;
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
     List<Message> findByChatname(String username);
-
+    List<Message> findAll();
 
 }

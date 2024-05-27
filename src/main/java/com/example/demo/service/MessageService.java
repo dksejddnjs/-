@@ -44,6 +44,8 @@ public class MessageService {
 
     public List<Message> getChatHistory(String username) {
         // 사용자의 채팅 기록을 DB에서 조회
-        return messageRepository.findByChatname(username);
+//        return messageRepository.findByChatname(username);
+        // DB 전부 조회
+        return messageRepository.findAll();
     }
 }
