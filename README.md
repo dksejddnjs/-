@@ -346,7 +346,7 @@ JpaRepository<T, ID>	=> T: 엔티티 타입, ID: 식별자 타입
 JpaRepository가 기본적으로 제공하는 주요 메소드
 
 
-<.S extends T.> S save(S): 새로운 엔티티는 저장하고, 이미 있는 엔티티는 병합한다.
+<.S extends T.> S save(S): 새로운 엔티티는 저장하고, 이미 있는 엔티티는 병합한다. (.은 제외)
 
 delete(T): 엔티티 하나를 삭제한다.
 
