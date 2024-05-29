@@ -279,7 +279,7 @@ Request/ Response 객체 조작 가능 여부: X
 - Controller로 넘겨주는 정보(데이터)의 가공
 --------------------------------------------------------------------------------------
 
-**0528 스프링 **
+**0528 스프링**
 
 @EnableRedisHttpSession
 
@@ -345,35 +345,35 @@ JpaRepository<T, ID>	=> T: 엔티티 타입, ID: 식별자 타입
 
 JpaRepository가 기본적으로 제공하는 주요 메소드
 
-- <S extends T> S save(S): 새로운 엔티티는 저장하고, 이미 있는 엔티티는 병합한다.
+<S extends T> S save(S): 새로운 엔티티는 저장하고, 이미 있는 엔티티는 병합한다.
 
-- delete(T): 엔티티 하나를 삭제한다.
+delete(T): 엔티티 하나를 삭제한다.
 
-- Optional<T> findById(ID): ID로 엔티티 하나를 조회한다.
+Optional<T> findById(ID): ID로 엔티티 하나를 조회한다.
 
-- List<T> findAll(…): 모든 엔티티를 조회한다. 정렬(Sort)이나 페이징(Pageable) 조건을 파라미터로 제공할 수 있다.
+List<T> findAll(…): 모든 엔티티를 조회한다. 정렬(Sort)이나 페이징(Pageable) 조건을 파라미터로 제공할 수 있다.
 
--------------------------------------------------------------------
+
 Query Creation
 
 Spring Date JPA는 메서드의 이름으로 쿼리를 생성한다.  JpaRepository를 상속한 인터페이스 안에서 규칙에 맞게 메서드를 선언해주면 된다.
 
+--------------------------------------------------------------------------
+쿼리 종류/ 이름 규칙
 
-쿼리 종류			이름 규칙
+조회: find…By, read…By, query…By, get…By
 
-조회				   find…By, read…By, query…By, get…By
+COUNT: count…By 반환 타입 long
 
-COUNT			  count…By 반환 타입 long
+EXISTS: exists…By 반환타입 boolean
 
-EXISTS			 exists…By 반환타입 boolean
+삭제: delete…By, remove…By
 
-삭제				   delete…By, remove…By
+DISTINCT: findDistinct, findMemberDistinctBy
 
-DISTINCT  findDistinct, findMemberDistinctBy
+LIMIT: findFirst3, findFirst, findTop, findTop3
 
-LIMIT			  findFirst3, findFirst, findTop, findTop3
-
--------------------------------------------------------------------
+-----------------------------------------------------------
 CRUD
 
 Create, Read, Update, Delete의 약어로 데이터베이스와 같은 시스템에서 기본적인 데이터 관리 기능을 의미한다.
