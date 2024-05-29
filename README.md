@@ -335,7 +335,7 @@ MVC 모델의 이점
 
 공통 인터페이스, JapRepository
 
-Spring Data Map는 JpaRepository 라는 공통 인터페이스를 제공. 기본적인 CRUD와 페이징 등 유용한 기능을 제공한다. 또한 @Repository 어노테이션 생략이 가능하다. 컴포넌트 스캔과 JPA 예외를 스프링 예외로 변환하는 과정을 스프링 데이터 JPA가 자동으로 처리해준다.
+Spring Data는 JpaRepository 라는 공통 인터페이스를 제공. 기본적인 CRUD와 페이징 등 유용한 기능을 제공한다. 또한 @Repository 어노테이션 생략이 가능하다. 컴포넌트 스캔과 JPA 예외를 스프링 예외로 변환하는 과정을 스프링 데이터 JPA가 자동으로 처리해준다.
 
 JpaRepository<T, ID>	=> T: 엔티티 타입, ID: 식별자 타입
 
