@@ -329,3 +329,51 @@ MVC 모델의 이점
 - 서비스 처리: 데이터베이스에 접속해서 데이터를 취득하거나 데이터를 가공하는 등 여러 가지 작업을 실행. 개발자가 설계하고 구현. (스프링 MVC와 관계 X)
 
 - 뷰: 화면 표시 처리
+
+-------------------------------------------------------------------
+**0529 스프링 Jpa**
+
+공통 인터페이스, JapRepository
+
+Spring Data Map는 JpaRepository 라는 공통 인터페이스를 제공. 기본적인 CRUD와 페이징 등 유용한 기능을 제공한다. 또한 @Repository 어노테이션 생략이 가능하다. 컴포넌트 스캔과 JPA 예외를 스프링 예외로 변환하는 과정을 스프링 데이터 JPA가 자동으로 처리해준다.
+
+JpaRepository<T, ID>	=> T: 엔티티 타입, ID: 식별자 타입
+
+—————————————————
+
+주요 메서드
+
+JpaRepository가 기본적으로 제공하는 주요 메소드
+
+- <S extends T> S save(S): 새로운 엔티티는 저장하고, 이미 있는 엔티티는 병합한다.
+
+- delete(T): 엔티티 하나를 삭제한다.
+
+- Optional<T> findById(ID): ID로 엔티티 하나를 조회한다.
+
+- List<T> findAll(…): 모든 엔티티를 조회한다. 정렬(Sort)이나 페이징(Pageable) 조건을 파라미터로 제공할 수 있다.
+
+————————————————————
+Query Creation
+
+Spring Date JPA는 메서드의 이름으로 쿼리를 생성한다.  JpaRepository를 상속한 인터페이스 안에서 규칙에 맞게 메서드를 선언해주면 된다.
+
+
+쿼리 종류			이름 규칙
+
+조회				   find…By, read…By, query…By, get…By
+
+COUNT			  count…By 반환 타입 long
+
+EXISTS			 exists…By 반환타입 boolean
+
+삭제				   delete…By, remove…By
+
+DISTINCT  findDistinct, findMemberDistinctBy
+
+LIMIT			  findFirst3, findFirst, findTop, findTop3
+
+———————————————————————
+CRUD
+
+Create, Read, Update, Delete의 약어로 데이터베이스와 같은 시스템에서 기본적인 데이터 관리 기능을 의미한다.
